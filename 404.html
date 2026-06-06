@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Lost in the Net</title>
+<link rel="icon" type="image/png" href="logo.png">
+
+<style>
+:root {
+    --bg: #000;
+    --fg: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+    overflow: hidden;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+
+    height: 100vh;
+
+    padding-top: 110px;
+    padding-left: 200px;
+}
+
+.logo {
+    width: 112px;
+    margin-bottom: 76px;
+}
+
+.logo svg {
+    width: 100%;
+    display: block;
+}
+
+.error-code {
+    font-size: 96px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    line-height: 1;
+}
+
+.content {
+    max-width: 620px;
+}
+
+.content p {
+    font-size: 20px;
+    line-height: 1.45;
+    margin-bottom: 36px;
+    font-weight: 400;
+}
+
+.links {
+    display: flex;
+    gap: 24px;
+    margin-top: 8px;
+}
+
+.links a,
+.footer a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 3px 6px;
+}
+
+.links a:hover,
+.links a:focus-visible,
+.footer a:hover,
+.footer a:focus-visible {
+    outline: 2px dotted rgba(255,255,255,.9);
+    outline-offset: 3px;
+}
+
+.footer {
+    position: absolute;
+    left: 200px;
+    bottom: 70px;
+
+    display: flex;
+    gap: 34px;
+
+    font-size: 16px;
+}
+
+a {
+    transition: .12s ease;
+}
+
+@media (max-width: 900px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .page {
+        padding: 40px 24px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .logo {
+        margin-bottom: 0px;
+    }
+    
+    .error-code {
+        font-size: 72px;
+    }
+
+    .links {
+        flex-wrap: wrap;
+    }
+
+    .footer {
+        position: static;
+        margin-top: 80px;
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="page">
+
+    <div class="logo">
+        <svg viewBox="0 0 64 64" fill="none">
+            <path
+                d="M16 32H48"
+                stroke="white"
+                stroke-width="4"
+            />
+            <path
+                d="M24 16L32 32L40 16"
+                stroke="white"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </div>
+
+    <div class="content">
+        <h1 class="error-code">404</h1>
+
+        <p>
+            The route or resource you are looking for does not exist. 
+            It may have been relocated, unmapped, or purged entirely.
+        </p>
+
+        <p>
+            Check the directory path spelling or return back to the main node.
+        </p>
+
+        <div class="links">
+            <a href="index.html">go back home</a>
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+// Expanded point layout designed to suggest structural grid breaks
+const points = [
+    [100, 150], [400, 150], [400, 500], [550, 500], // Left anchor cluster
+    [1150, 700], [450, 850], [1600, 130],
+    [800, 200], [800, 600], [1100, 600], [1100, 200], [800, 200], // Center box loop
+    [1850, 200], [600, 150], [1060, 950], [350, 600], 
+    [1400, 200], [1400, 550], [1600, 550], [1400, 550], [1400, 800], // Right branch path
+    [1820, 820], [820, 180], [1900, 980], [1040, 120], [100, 750]
+];
+
+function draw() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const scaleX = canvas.width / 1920;
+    const scaleY = canvas.height / 1080;
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 1.0)";
+    ctx.lineWidth = 1;
+
+    ctx.beginPath();
+    
+    ctx.moveTo(points[0][0] * scaleX, points[0][1] * scaleY);
+
+    for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i][0] * scaleX, points[i][1] * scaleY);
+    }
+
+    ctx.stroke();
+}
+
+draw();
+window.addEventListener("resize", draw);
+</script>
+
+</body>
+</html>
