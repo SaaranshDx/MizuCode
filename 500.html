@@ -5,11 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>500 — Internal Breakdown</title>
 <link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg: #000;
-    --fg: #fff;
+    --bg: #000000;
+    --text: #ffffff;
+    --selection-bg: #444444;
 }
 
 * {
@@ -25,14 +29,16 @@ body {
 }
 
 body {
+    font-family: "Space Grotesk", system-ui, Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.01rem;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--text);
     background: var(--bg);
-    color: var(--fg);
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        sans-serif;
     overflow: hidden;
 }
 
@@ -46,14 +52,14 @@ canvas {
     position: relative;
     z-index: 1;
     height: 100vh;
-    padding-top: 110px;
+    padding-top: 60px;
     padding-left: 200px;
 }
 
 /* Updated logo sizing to match your 404 page */
 .logo {
     width: 112px;
-    margin-bottom: 76px;
+    margin-bottom: 48px;
 }
 
 .logo svg {
